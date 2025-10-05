@@ -1,0 +1,62 @@
+Assignment 4: Heap Data Structures: Implementation, Analysis, and Applications
+
+Heapsort Implementation and Analysis
+
+Analysis of Implementation
+    -> The Heapsort algorithm is a comparison-based sorting technique built on the binary heap data structure. It operates in two main phases: (1) building a max heap from the input array, and (2) repeatedly extracting the largest element from the heap and placing it at the end of the array.
+    Time Complexity Analysis
+    1. Heap Construction: Building a max heap from an unsorted array takes O(n) time because the heapify operation is applied to all non-leaf nodes, and the work done decreases exponentially at each level of the heap.
+    2. Sorting Phase: After the heap is built, each of the n elements is extracted once, and each extraction requires a heapify operation that takes O(log n) time (height of the heap). Thus, this phase costs O(n log n) time.
+    
+    Case-by-Case Analysis
+    Case	                                         Description                                                               	Time Complexity
+    Best Case	    Even if the array is already sorted, Heapsort still performs full heap construction and extraction.	          O(n log n)
+    Average Case	For random input, each element requires heapify calls proportional to log n.	                              O(n log n)
+    Worst Case	    Reverse-sorted input behaves the same as average, as Heapsort is insensitive to input order.                  O(n log n)
+
+    Key Insight: Unlike Quicksort, whose performance heavily depends on the pivot selection, Heapsort consistently maintains O(n log n) performance across all cases, making it more predictable.
+    Space Complexity
+    1. Heapsort is an in-place sorting algorithm.
+    2. It only requires O(1) auxiliary space as the sorting is performed within the original array using index manipulation.
+    3. The only additional overhead comes from recursive calls in heapify, but this is limited to O(log n) due to the heap height.
+
+    Additional Overheads
+    1. The constant factors in Heapsort are typically higher than those of Quicksort because of frequent swap and heapify operations.
+    2. Heapsort also lacks good cache performance since its access pattern jumps across the array, unlike Quicksort and MergeSort, which exhibit better locality of reference.
+
+Comparison
+  ->An empirical comparison was conducted between Heapsort, Quicksort, and MergeSort across different input distributions and input sizes (100 to 1000 elements). The results demonstrate the relative efficiency and practical behavior of each algorithm.
+
+    3.1 Empirical Observations
+
+    (a) Random Input
+    1. Quicksort performed the fastest overall due to its efficient partitioning and cache-friendly access pattern.
+    2. MergeSort followed closely, while Heapsort lagged slightly because of its larger constant factors.
+    3. All three algorithms demonstrated the expected O(n log n) growth trend.
+
+    (b) Sorted Input
+    1. Quicksort maintained strong performance because of the randomized pivot selection in implementation.
+    2. MergeSort showed stable times due to its consistent divide-and-conquer structure.
+    3. Heapsort again displayed slightly higher times but remained consistent across input sizes.
+
+    (c) Reverse-Sorted Input
+    1. Similar to the sorted case, Heapsort was unaffected by input order, maintaining stable O(n log n) behavior.
+    2. Quicksort’s randomized implementation prevented it from degrading to O(n²).
+    3. MergeSort’s performance was consistent as always.
+
+    (d) Nearly-Sorted Input
+    1. Quicksort benefited significantly from nearly sorted data.
+    2. MergeSort remained stable.
+    3. Heapsort did not show improvement with sortedness, reaffirming that its performance is independent of input characteristics.
+
+    3.2 Theoretical vs Empirical Analysis
+    Algorithm	 Theoretical Complexity	                           Empirical Performance	                             Remarks
+    Heapsort	 O(n log n) (all cases)	              Consistent but slightly slower due to swap overhead	   Predictable, stable, space-efficient
+    Quicksort	 O(n log n) average, O(n²) worst	  Fastest in practice for all distributions	               Excellent cache performance
+    MergeSort	 O(n log n) (all cases)	              Slightly slower than Quicksort	                       Stable, predictable, uses extra space O(n)
+
+Conclusion
+    Heapsort’s consistent O(n log n) time complexity makes it suitable for applications requiring predictable performance and low memory usage. However, for general-purpose sorting where average performance is prioritized over worst-case guarantees, Quicksort often remains the preferred choice due to its faster empirical behavior and better cache utilization.
+
+
+Priority Queue Implementation and Applications
